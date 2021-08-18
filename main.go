@@ -1,7 +1,6 @@
 package main
 
 import (
-	"context"
 	"database/sql"
 	"fmt"
 	"os"
@@ -64,14 +63,12 @@ func main() {
 	execOrPanic("insert into accounts values('checking', 0);")
 	execOrPanic("insert into accounts values('savings', 0);")
 
-	ctx := context.Background()
-
-	tx1, err := db.BeginTx(ctx, nil)
+	tx1, err := db.Begin()
 	if err != nil {
 		panic(err)
 	}
 
-	tx2, err := db.BeginTx(ctx, nil)
+	tx2, err := db.Begin()
 	if err != nil {
 		panic(err)
 	}
@@ -91,7 +88,7 @@ func main() {
 		panic(err)
 	}
 
-	tx3, err := db.BeginTx(ctx, nil)
+	tx3, err := db.Begin()
 	if err != nil {
 		panic(err)
 	}
